@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     acf.fields.focuspoint = acf.field.extend({
 
         type: 'focuspoint',
@@ -16,14 +16,14 @@
             'change input[type="file"]': 'change'
         },
 
-        focus: function() {
+        focus: function () {
             // get elements
             this.$el = this.$field.find('.acf-image-uploader');
             // get options
             this.o = acf.get_data(this.$el);
         },
 
-        initialize: function($el) {
+        initialize: function ($el) {
 
             // add attribute to form
             if (this.o.uploader == 'basic') {
@@ -48,7 +48,7 @@
             // DOM elements
             var img = $img.get(0);
 
-            $selection.on('click', function(event) {
+            $selection.on('click', function (event) {
 
                 var iw = $(this).outerWidth();
                 var ih = $(this).outerHeight();
@@ -68,7 +68,7 @@
             });
         },
 
-        add: function() {
+        add: function () {
             // reference
             var self = this,
                 $field = this.$field;
@@ -87,7 +87,7 @@
                 library: this.o.library,
                 mime_types: this.o.mime_types,
 
-                select: function(attachment, i) {
+                select: function (attachment, i) {
 
                     // select / add another image field?
                     if (i > 0) {
@@ -99,7 +99,7 @@
                         $field = false;
 
                         // find next image field
-                        $tr.nextAll('.acf-row:visible').each(function() {
+                        $tr.nextAll('.acf-row:visible').each(function () {
 
                             // get next $field
                             $field = acf.get_field(key, $(this));
@@ -149,7 +149,7 @@
 
         },
 
-        prepare: function(attachment) {
+        prepare: function (attachment) {
             // vars
             var image = {
                 id: attachment.id,
@@ -161,7 +161,7 @@
             leftVal = this.$el.find('[data-name="acf-focuspoint-left"]').val();
             topVal = this.$el.find('[data-name="acf-focuspoint-top"]').val();
 
-            if( leftVal && topVal ){
+            if (leftVal && topVal) {
                 this.$el.find('.focal-point-picker').css({
                     top: topVal + '%',
                     left: leftVal + '%'
@@ -185,7 +185,7 @@
 
         },
 
-        render: function(image) {
+        render: function (image) {
 
             // set atts
             this.$el.find('[data-name="acf-focuspoint-img"]').attr('src', image.url);
@@ -196,7 +196,7 @@
 
         },
 
-        edit: function() {
+        edit: function () {
             // reference
             var self = this;
 
@@ -209,19 +209,19 @@
                 mode: 'edit',
                 id: id,
 
-                select: function(attachment, i) {
+                select: function (attachment, i) {
                     self.render(self.prepare(attachment)).trigger('change');
                 }
 
             });
 
         },
-        
-        removeAttachment: function(){
-            this.render( false );
+
+        removeAttachment: function () {
+            this.render(false);
         },
 
-        remove: function() {
+        remove: function () {
             // vars
             var attachment = {
                 id: '',
@@ -240,7 +240,7 @@
 
         },
 
-        change: function(e) {
+        change: function (e) {
             this.$el.find('[data-name="acf-focuspoint-img-id"]').val(e.$el.val()).trigger('change');
         }
 
@@ -263,10 +263,10 @@
          *  @return  n/a
          */
 
-        acf.add_action('ready append', function($el) {
+        acf.add_action('ready append', function ($el) {
 
             // search $el for fields of type 'focuspoint'
-            acf.get_fields({ type: 'focuspoint' }, $el).each(function() {
+            acf.get_fields({ type: 'focuspoint' }, $el).each(function () {
 
                 //initialize_field($(this));
                 acf.fields.focuspoint.initialize($el)
@@ -294,9 +294,9 @@
          *  @return  n/a
          */
 
-        $(document).live('acf/setup_fields', function(e, postbox) {
+        $(document).live('acf/setup_fields', function (e, postbox) {
 
-            $(postbox).find('.field[data-field_type="focuspoint"]').each(function() {
+            $(postbox).find('.field[data-field_type="focuspoint"]').each(function () {
 
                 initialize_field($(this));
 

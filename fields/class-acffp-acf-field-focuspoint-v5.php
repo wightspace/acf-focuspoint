@@ -587,7 +587,7 @@ class acffp_acf_field_focuspoint extends acf_field {
 		if( !is_numeric($value['id']) ) return false;
 
 		$image = wp_get_attachment_image_src( $value['id'], 'full' );
-		$image_size_kb = filesize( get_attached_file( $value['id'] ) );
+		$image_size_kb = null;//filesize( get_attached_file( $value['id'] ) );
 		
 		if( !empty($field['min_width']) && $image[1] < $field['min_width'] ) {
 			$valid = sprintf( __('Image width must be at least %dpx.', 'acf-focuspoint'), $field['min_width'], $image[1], $image[2] );
